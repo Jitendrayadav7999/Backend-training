@@ -1,35 +1,35 @@
 const express = require('express');
-const _ = require('underscore')
+const lod = require('lodash');
 
-const abc = require('../introduction/intro')
-const loggerModule = require('../logger/logger.js')
-const formatterModule = require('../validator/formatter') 
-const helperModule = require('../util/helper')
+
 const router = express.Router();
 
 router.get('/test-me', function (req, res) {
-    console.log('My batch is', abc.name)
-    abc.printName()
-    loggerModule.printInfo()
-    formatterModule.trimMyString()
-    formatterModule.getUpperCaseString()
-    formatterModule.changetoLowerCase()
-    helperModule.getTodaysDate()
-    helperModule.getCurrentMonth()
-    helperModule.printBatchDetails()
-    let weekdend = ['Saturday','Sunday','Monday']
-    let result = _.first(weekdend, 2)
-    console.log('Unserscore example resultr is ',result)
-    res.send('My second ever api!')
+    
+    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let result1 = lod.chunk(months, 3)
+    console.log("after division by 3", result1)
+
+    let oddNumber = [1,3,5,7,9,11,13,15,17,19]
+    let tail = lod.tail(oddNumber)
+    console.log(tail)
+
+
+    let number = ([3,2,1,4,5,6],[4,5,6,1,2,3],[3,6,5,2,4,1],[1,4,2,5,6,3],[5,2,4,1,6,3])
+    let union = lod.union(number)
+    console.log(union)
+
+
+    let movies = [["horror","The Shining"],["drama","Titanic"],["thriller","Shutter Island"],["fantasy","Pans Labyrinth"]]
+    let fromPairs = lod.fromPairs(movies)
+    console.log(fromPairs)
+
+
+
+
+    res.send('My module Assignment')
+     
 });
 
-
-router.get('/test-you', function(req, res){
-    res.send('This is the second routes implementation')
-})
-
-router.get('/give-me-students-data',function(req, res){
-
-})
 module.exports = router;
 // adding this comment for no reason
