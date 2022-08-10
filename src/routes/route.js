@@ -1,25 +1,50 @@
 const express = require('express');
-
-
 const router = express.Router();
 
-router.get("/sol2", function (req, res) {
-    let arr= [33, 34, 35, 37, 38]
-    let len= arr.length
- 
-    let sum = 0;
-    for (var i in arr) {
-        sum = sum + arr[i];
-    }
- 
-    let firstDigit= arr[0]
-    let lastDigit= arr.pop()
-    let totalSum= (len + 1) * (firstDigit+ lastDigit ) / 2
-    let missingNumber= totalSum - sum
-   
-    res.send(  { data: missingNumber  }  );
-  });
- 
- 
-module.exports = router;
-// adding this comment for no reason
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ],
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ],
+       },
+   ]
+  
+    router.post('/players', function (req, res) {
+      let input = req.body
+     
+       let newPlyer = input.name
+      for (let i = 0; i < players.length; i++){
+        let new1 = players[i]
+        if (newPlyer == new1.name)  {
+           res.send({msg: "already exists in the data"}) 
+        }
+            
+      }
+      players.push(req.body)
+      res.send(  { msg :"done" ,data: players , status: true }  ) 
+});
+
+module.exports = router
