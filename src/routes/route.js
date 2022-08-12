@@ -1,50 +1,43 @@
 const express = require('express');
 const router = express.Router();
+let person = [
+    {name : "PK",
+     age : 10,
+     votingStatus : false
+    },
+    {
+     name : "Sk",
+     age : 20,
+     votingStatus : false 
+    },
+    {
+     name : "AA",
+     age : 70,
+     votingStatus : false
+    },
+    {
+     name : "Sc",
+     age : 5,
+     votingStatus : false
+    },
+    {
+    name: "No",
+    age: 40,
+    votingStatus: false
+    }
 
-let players =
-   [
-       {
-           "name": "manish",
-           "dob": "1/1/1995",
-           "gender": "male",
-           "city": "jalandhar",
-           "sports": [
-               "swimming"
-           ]
-       },
-       {
-           "name": "gopal",
-           "dob": "1/09/1995",
-           "gender": "male",
-           "city": "delhi",
-           "sports": [
-               "soccer"
-           ],
-       },
-       {
-           "name": "lokesh",
-           "dob": "1/1/1990",
-           "gender": "male",
-           "city": "mumbai",
-           "sports": [
-               "soccer"
-           ],
-       },
-   ]
-  
-    router.post('/players', function (req, res) {
-      let input = req.body
-     
-       let newPlyer = input.name
-      for (let i = 0; i < players.length; i++){
-        let new1 = players[i]
-        if (newPlyer == new1.name)  {
-           res.send({msg: "already exists in the data"}) 
-        }
-            
-      }
-      players.push(req.body)
-      res.send(  { msg :"done" ,data: players , status: true }  ) 
-});
+ ]
+router.post("/check-Voting-Age", function(req,res){
+let age = req.query.age
+for (let i = 0; i < person.length; i++) {
+    const personAge = person[i];
+    if (personAge.age >= age) {
+        personAge.votingStatus = true
+     }
+}
+ let validVoter =person.filter(ele => ele.age >= age)
+res.send(validVoter)
+})
+
 
 module.exports = router
