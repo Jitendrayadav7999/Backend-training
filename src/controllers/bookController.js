@@ -32,10 +32,7 @@ let XINRBooks = await bookModel.find({"price.indian": { $in: ["100INR", "200INR"
 res.send({msg:XINRBooks})
 }
 
-const getRandomBooks = async function(req,res){
-// let RandomBooks = await bookModel.find({ $or:[{stockAvailable: true},{totalPages:{$gt:500}}]}
-res.send({msg:RandomBooks})
-}
+
 
 const get = async function(req,res){
     let randambooks = await bookModel.find({ $or:[{stockAvailable: true},{totalPages:{$gt:500}}]})
