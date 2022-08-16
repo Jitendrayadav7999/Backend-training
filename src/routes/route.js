@@ -12,7 +12,7 @@ router.post("/getParticularBooks", bookController.getParticularBooks)
 
 router.post("/getXINRBooks",  bookController.getXINRBooks)
 
-
-
 router.get("/get", bookController.get)
+
 module.exports = router; 
+
