@@ -35,8 +35,8 @@ res.send({msg1:findAuther,msg2:updatePrice})
 const BooksCost = async function(req,res){
     let costbeetween = await BookModel.find({price :{$gte:50,  $lte:100}}).select({author_id:1, _id:0})
     let findId = costbeetween.map(x=>x.author_id)
-    let findAuthor = await AutherModel.find({author_id:{$in:findId}}).select({author_name:1})
-    console.log(findId)
+    let findAuthor = await AutherModel.find({author_id:{$in:findId}}).select({author_name:1, _id:0)
+//     console.log(findId)
     res.send({msg:findAuthor})
 }
 
