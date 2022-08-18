@@ -24,7 +24,7 @@ const UpdateBookPrice = async function(req,res){
 let updatePrice = await BookModel.findOneAndUpdate(
     {name:"Two states"},
     {$set:{price:100}},
-    {new:true,upsert:true}
+    {new:true}
 )
 let findId = await BookModel.findOne(updatePrice).select( {author_id:1, _id:0})
 let findAuther = await AutherModel.find(findId)
