@@ -15,7 +15,9 @@ router.post("/createBook", bookController.createBook  )
 
 router.get("/getBook",bookController.getBooks)
 
-router .get("/getbooklist",bookController.getBooks)
+router.get("/getbooklist",bookController.getBooks)
+
+router.put("/books",bookController.books)
 
 
 
