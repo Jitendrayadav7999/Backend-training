@@ -12,10 +12,10 @@ const createBook = async function (req, res) {
    else if (!check2)
       return res.send({ msg: "publisherId detail is required" })
 
-   let autherId = await authorModel.findOne({ _id: "62ffd5975af27bb721f965d9" })
-   let publisherId = await publisherModel.findOne({ _id: "62ffd3bf5af27bb721f965cf" })
-   let id = autherId._id
-   let id2 = publisherId._id
+   let autherId = await authorModel.find({_id:check1}).select({_id:1})
+   let publisherId = await publisherModel.find({ _id:check2 }).select({_id:1})
+   let id = autherId[0]._id
+   let id2 = publisherId[0]._id
 
    if (check1 != id)
       return res.send({ msg: "the author is not present." })
@@ -35,12 +35,21 @@ const getBooks = async function (req, res) {
 
 const books = async function (req, res) {
    let findPublisher = await publisherModel.find({$or:[{name:"Penguin"},{name:'HarperCollins'}]}).select({_id:1})
-   let updatedBook= await bookModel.find({"publisherId":findPublisher}).updateMany({$set:{ isHardCover:true}})
+   // let updatedBook= await bookModel.find({publisherId:findPublisher}).updateMany({$set:{ isHardCover:true}})
+     let updatedBook1= await bookModel.updateMany(
+      {publisherId:findPublisher},
+      {$set:{isHardCover:false}},
+      {new:true}
+   )
  
    let findRating = await authorModel.find({rating :{$gt:3.5}}).select({_id:1})
-   let updatePrice = await bookModel.find({"authorId":findRating}).updateMany({$inc:{price:10}})
+   // let updatePrice = await bookModel.find({"authorId":findRating}).updateMany({$inc:{price:10}})
+   let updatePrice1 = await bookModel.updateMany(
+      {authorId:findRating},
+      {$inc:{price:10}}
+   )
 
-   res.send({msg1:updatedBook,msg2:updatePrice})
+   res.send({msg1:updatedBook1,msg2:updatePrice1})
 
 }
 
