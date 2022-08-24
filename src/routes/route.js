@@ -4,15 +4,27 @@ const router = express.Router();
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 const commonMW = require ("../middlewares/commonMiddlewares")
+const test_1 = require("../controllers/test-1Controller")
+const test_2 = require("../controllers/test-2Controller")
+const test_3 = require("../controllers/test-3Controller")
+const test_4 = require("../controllers/test-4Controller")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
+// ===============Assignment Middleware============
+
+router.get("/test-1",test_1.test_1)
+router.get("/test-2",test_2.test_2)
+router.get("/test-3",test_3.test_3)
+router.get("/test-4",test_4.test_4)
+
+// ========================================================
 
 
 
 
-router.post("/createBook", BookController.createBook  )
+// router.post("/createBook", BookController.createBook  )
 
 
 
@@ -48,7 +60,7 @@ router.post("/createBook", BookController.createBook  )
 
 
 
-router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
+// router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
 
 
 
