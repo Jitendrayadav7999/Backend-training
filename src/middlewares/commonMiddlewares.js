@@ -1,7 +1,10 @@
 
 const mid1= function ( req, res, next) {
-    if (!req.headers.isfreeappuser) {
+   let freeappuser = req.headers.isfreeappuser
+    if (!freeappuser) {
         return res.send({msg:"the request is missing a mandatory header"})
+    }else{
+        // convert to boolean header value
     }
     next()
 }

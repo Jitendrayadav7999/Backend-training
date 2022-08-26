@@ -5,7 +5,7 @@ const createUser= async function (req, res) {
     let createuser = await UserModel.create(data)
     let update = await UserModel.updateOne({name:createuser.name},{$set:{isFreeAppUser:data1}})
 
-    res.send({msg:update})
+    res.send({msg:createuser})
 }
 
 module.exports.createUser= createUser
