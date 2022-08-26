@@ -6,7 +6,7 @@ const createOrder = async function (req, res) {
     let data = req.body
     let freeAppUser = req.headers.isfreeappuser
 
-    let findUser = await userModel.findById({ _id: data.userId }).select({_id:1})
+    let findUser = await userModel.findById({ _id: data.userId })
     if (!findUser) return res.send({ status: false, msg: "userId is invalid" })
     let findproduct = await productModel.findById({ _id: data.productId })
     if (!findproduct) return res.send({ status: false, msg: "productId is invalid " })
@@ -14,8 +14,8 @@ const createOrder = async function (req, res) {
     if (freeAppUser == "false") {
         if (findUser.balance >= data.amount) {
             let ordercreated = await orderModel.create(data)
-            let update = await userModel.updateOne({ _id: findUser }, { $inc: { balance: - data.amount } })
-            let update1 = await userModel.updateOne({ _id: findUser },{$set:{isFreeAppUser:freeAppUser}})
+            let update = await userModel.updateOne({ _id: findUser._id }, { $inc: { balance: - data.amount } })
+            let update1 = await userModel.updateOne({ _id: findUser._id },{$set:{isFreeAppUser:freeAppUser}})
             return res.send({ msg: ordercreated })
         } else if (findUser.balance <= data.amount) {
             return res.send({ status: true, msg: " the user doesn't have enough balance" })
@@ -23,8 +23,7 @@ const createOrder = async function (req, res) {
     } else if (freeAppUser == "true") {
         let ordercreated = await orderModel.create(data)
         let update = await orderModel.updateOne({ _id: ordercreated._id }, { $set: { amount: 0 } })
-        let update1 = await userModel.updateOne({ _id: findUser },{$set:{isFreeAppUser:freeAppUser}})
-        ordercreated["isFreeAppUser"] = freeAppUse
+        let update1 = await userModel.updateOne({ _id: findUser._id },{$set:{isFreeAppUser:freeAppUser}})
         return res.send({ data: ordercreated })
     }
 }
