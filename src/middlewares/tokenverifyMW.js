@@ -10,9 +10,9 @@ const tokenverify = async function (req, res, next) {
      function(err, decoded) {         //call back function
         if (err)
         return res.send({ status: false, message:"invalid token"}); 
-        next();
+      
        });
-       
+       next();
     };
 
 module.exports.tokenverify = tokenverify

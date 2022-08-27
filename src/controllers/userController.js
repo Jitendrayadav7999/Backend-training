@@ -58,7 +58,7 @@ const deleteUser = async function (req, res) {
   let user = await userModel.findById(userId);
   //Return an error if no user with the given id exists in the db
   if (!user) {
-    return res.send("No such user exists");
+    return res.send({status:false,msg:"No such user exists"});
   }
   let userData = req.body;
   let deleteUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
