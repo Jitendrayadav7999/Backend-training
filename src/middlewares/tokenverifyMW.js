@@ -15,10 +15,4 @@ const tokenverify = async function (req, res, next) {
        
     };
 
-
-
-    // if (!decodedToken) return res.send({ status: false, msg: "token is invalid" });
-
-    // next()
-// }
 module.exports.tokenverify = tokenverify
