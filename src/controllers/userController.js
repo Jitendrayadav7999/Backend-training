@@ -18,7 +18,7 @@ const loginUser = async function (req, res) {
       msg: "username or the password is not corerct",
     });
 
-    //Create Token
+  //Create Token
   let token = jwt.sign(
     {
       userId: user._id.toString(),
@@ -32,7 +32,11 @@ const loginUser = async function (req, res) {
 };
 
 const getUserData = async function (req, res) {
-  res.send({ status: true, data: req.userDetails });
+  let userDetails = await userModel.findById(req.userId);
+  if (!userDetails)
+    return res.send({ status: false, msg: "No such user exists" });
+
+  res.send({ status: true, data:userDetails});
 };
 
 const updateUser = async function (req, res) {
