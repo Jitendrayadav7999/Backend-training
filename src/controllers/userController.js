@@ -32,36 +32,18 @@ const loginUser = async function (req, res) {
 };
 
 const getUserData = async function (req, res) {
-  let userId = req.params.userId;
-  let userDetails = await userModel.findById(userId);
-  if (!userDetails)
-    return res.send({ status: false, msg: "No such user exists" });
-
-  res.send({ status: true, data: userDetails });
+  res.send({ status: true, data: req.userDetails });
 };
 
 const updateUser = async function (req, res) {
-  let userId = req.params.userId;
-  let user = await userModel.findById(userId);
-  //Return an error if no user with the given id exists in the db
-  if (!user) {
-    return res.send("No such user exists");
-  }
-
   let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
+  let updatedUser = await userModel.findOneAndUpdate({ _id: req.userId }, userData, { new: true });
   res.send({ status: updatedUser });
 }
 
 const deleteUser = async function (req, res) {
-  let userId = req.params.userId;
-  let user = await userModel.findById(userId);
-  //Return an error if no user with the given id exists in the db
-  if (!user) {
-    return res.send({status:false,msg:"No such user exists"});
-  }
   let userData = req.body;
-  let deleteUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
+  let deleteUser = await userModel.findOneAndUpdate({ _id: req.userId }, userData, { new: true });
   res.send({ status: deleteUser });
 }
 
