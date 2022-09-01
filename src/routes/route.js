@@ -6,6 +6,5 @@ router.get("/weather-Landon", weatherController.weatherLondon)
 
 router.get("/shorted-cities",weatherController.shortedCities)
 
-router.get("shortedCities",weatherController.shortedCities)
 
 module.exports = router;

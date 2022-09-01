@@ -10,7 +10,7 @@ const weatherLondon = async function (req, res) {
             url: `http://api.openweathermap.org/data/2.5/weather?q=${q}&appid=${key}`
         }
         let result = await axios(options);
-        let data = result.data                                              //.main.temp
+        let data = result.data.main.temp
         res.status(200).send({ temp: data, status: true })
     } catch (error) {
         console.log(error)
