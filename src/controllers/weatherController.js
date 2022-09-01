@@ -22,7 +22,7 @@ const weatherLondon = async function (req, res) {
 const shortedCities = async function (req, res) {
   try {
     let cities =[ "Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"]
-    let sortedResult = []
+    let cityTempObj = []
     let key = req.query.appid
     
     for (let i = 0; i < cities.length; i++) {
@@ -34,9 +34,9 @@ const shortedCities = async function (req, res) {
         }
         let result = await axios(options);
         object.temp = result.data.main.temp
-        sortedResult.push(object)
+        cityTempObj.push(object)
     }
-    let sort = sortedResult.sort((a,b) =>a.temp - b.temp)
+    let sort = cityTempObj.sort((a,b) =>a.temp - b.temp)
 
    res.status(200).send({ data: sort, status: true })
   } catch (error) {
