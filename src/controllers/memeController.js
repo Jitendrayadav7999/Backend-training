@@ -25,7 +25,7 @@ const createMemes = async function(req, res){
           url :`https://api.imgflip.com/caption_image?template_id=${id}&text0=${test}&test1=${test1}&username=${username}&password=${password}`
         }
         let result = await axios(options)
-        res.status(200).send({data:result})
+        res.status(200).send({data:result.data})
     } catch (error) {
         console.log(error)
         res.status(500).send({ msg: error.message })
