@@ -58,6 +58,4 @@ const getByDistrict = async function (req, res) {
 
 module.exports.getStates = getStates
 module.exports.getDistricts = getDistricts
-module.exports.getByPin = getByPin
-module.exports.getOtp = getOtp
 module.exports.getByDistrict = getByDistrict
