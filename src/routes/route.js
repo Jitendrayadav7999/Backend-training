@@ -1,17 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const userController= require("../controllers/userController")
-const AuthenticationMW = require("../middlewares/auth")
+const MemeController = require("../controllers/memeController")
 
-router.post("/users", userController.createUser  )
-
-router.post("/login", userController.loginUser)
-
-//The userId is sent by front end
-router.get("/users/:userId", AuthenticationMW.tokenverify, userController.getUserData)
-
-router.put("/users/:userId", AuthenticationMW.tokenverify, userController.updateUser)
-
-router.delete("/users/:userId", AuthenticationMW.tokenverify, userController.deleteUser)
+router.get("/getMemes",MemeController.getMemes)
+router.post("/createMemes",MemeController.createMemes)
 
 module.exports = router;
